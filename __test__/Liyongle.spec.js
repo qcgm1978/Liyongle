@@ -1,4 +1,14 @@
 const utils = require("./algorithm");
+const math = require("mathjs");
+
+it(`sphere volume`, () => {
+  const expression = `4/3 * PI * R^3`;
+  expect(
+    math.eval(expression, {
+      R: 2
+    })
+  ).toBeCloseTo(33.5, 1);
+});
 it(``, () => {
   expect(utils.getLunarDate({ date: new Date(), locale: "zh-Hans-CN" }))
     .toBe(
