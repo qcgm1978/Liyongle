@@ -55,8 +55,68 @@ const getTotal = ({ n }) => {
     solution
   };
 };
+
+function getLunarDate({ date, locale = "zh-TW-u-ca-chinese" }) {
+  var y = +Intl.DateTimeFormat(locale, {
+      year: "numeric"
+    })
+      .format(date)
+      .match(/\d+/)[0],
+    m = +Intl.DateTimeFormat(locale, {
+      month: "numeric"
+    })
+      .format(date)
+      .match(/\d+/)[0],
+    d = +Intl.DateTimeFormat(locale, {
+      day: "numeric"
+    })
+      .format(date)
+      .match(/\d+/)[0],
+    天干 = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"],
+    地支 = [
+      "子",
+      "丑",
+      "寅",
+      "卯",
+      "辰",
+      "巳",
+      "午",
+      "未",
+      "申",
+      "酉",
+      "戌",
+      "亥"
+    ],
+    十 = ["初", "十", "廿", "三"],
+    月 = ["", "十"],
+    個 = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
+
+  isL = isLeapMonth();
+
+  y = 天干[(y - 1) % 10] + 地支[(y - 1) % 12];
+  m = (月[((m - 1) / 10) | 0] + 個[(m - 1) % 10]).replace(/^一$/, "正");
+  d = (十[(d / 10) | 0] + 個[(d - 1) % 10])
+    .replace(/^十十$/, "初十")
+    .replace(/^廿十$/, "二十");
+
+  return y + "年" + (isL ? "閏" : "") + m + "月" + d;
+
+  function isLeapMonth() {
+    var _date = new Date(date);
+    _date.setDate(-d);
+    //console.log(+Intl.DateTimeFormat("zh-TW-u-ca-chinese",{month:"numeric"}).format(_date).match(/\d+/)[0],m);
+    return (
+      +Intl.DateTimeFormat("zh-TW-u-ca-chinese", {
+        month: "numeric"
+      })
+        .format(_date)
+        .match(/\d+/)[0] === m
+    );
+  }
+}
 module.exports = {
   getTotal,
   getPascalTriangle,
-  getPascalTriangleGraph
+  getPascalTriangleGraph,
+  getLunarDate
 };

@@ -1,4 +1,12 @@
 const utils = require("./algorithm");
+it(``, () => {
+  expect(utils.getLunarDate({ date: new Date(), locale: "zh-Hans-CN" }))
+    .toBe(
+      utils.getLunarDate({ date: new Date(), locale: "zh-TW-u-ca-chinese" })
+    )
+    .toBe(utils.getLunarDate({ date: new Date(), locale: "en-US" }))
+    .toBe("壬寅年六月廿二");
+});
 it(`harmonic series`, () => {
   const ret = utils.getTotal({ n: 1 });
   expect(ret.expression).toBe("1 / 1^1 + 1 / 2^1 + 1 / 3^1 + ... + 1 / n^1");
