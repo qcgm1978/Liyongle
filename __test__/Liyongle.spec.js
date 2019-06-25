@@ -10,12 +10,13 @@ it(`sphere volume`, () => {
   ).toBeCloseTo(33.5, 1);
 });
 it(``, () => {
-  expect(utils.getLunarDate({ date: new Date(), locale: "zh-Hans-CN" }))
+  expect(utils.getLunarDate({ date: new Date(), locale: "zh-Hans-CN" }).year)
     .toBe(
       utils.getLunarDate({ date: new Date(), locale: "zh-TW-u-ca-chinese" })
+        .year
     )
-    .toBe(utils.getLunarDate({ date: new Date(), locale: "en-US" }))
-    .toBe("壬寅年六月廿二");
+    .toBe(utils.getLunarDate({ date: new Date(), locale: "en-US" }).year)
+    .toBe("壬寅");
 });
 it(`harmonic series`, () => {
   const ret = utils.getTotal({ n: 1 });

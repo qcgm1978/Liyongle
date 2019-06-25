@@ -99,7 +99,9 @@ function getLunarDate({ date, locale = "zh-TW-u-ca-chinese" }) {
     .replace(/^十十$/, "初十")
     .replace(/^廿十$/, "二十");
 
-  return y + "年" + (isL ? "閏" : "") + m + "月" + d;
+  let lunerStr = y + "年" + (isL ? "閏" : "") + m + "月" + d;
+  lunerStr.year = y;
+  return { lunerStr, year: y };
 
   function isLeapMonth() {
     var _date = new Date(date);
