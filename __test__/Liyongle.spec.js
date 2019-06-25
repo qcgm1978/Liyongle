@@ -1,6 +1,15 @@
 const utils = require("./algorithm");
 const math = require("mathjs");
+var ft = require("fourier-transform");
+// var db = require("decibels");
+var sine = require("audio-oscillator/sin");
 
+it(`get normalized magnitudes for frequencies from 0 to 22050 with interval 44100/1024 ≈ 43Hz`, () => {
+  // generate sine wave 440 Hz
+  var waveform = sine(1024, 440);
+  var spectrum = ft(waveform);
+  expect(spectrum).toHaveLength(Math.trunc(22050 / 43));
+});
 it(`sphere volume`, () => {
   const expression = `4/3 * PI * R^3`;
   expect(
