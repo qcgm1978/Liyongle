@@ -1,5 +1,8 @@
 const utils = require("./algorithm");
 const math = require("mathjs");
+var ft = require("fourier-transform");
+// var db = require("decibels");
+var sine = require("audio-oscillator/sin");
 it(`am-gm inequality`, () => {
   const a = math.random(),
     b = math.random();
@@ -13,10 +16,17 @@ it(`am-gm inequality`, () => {
     .toBeGreaterThanOrEqual(geometricMean)
     .toBeGreaterThanOrEqual(harmmean);
 });
+
+it(`get normalized magnitudes for frequencies from 0 to 22050 with interval 44100/1024 ≈ 43Hz`, () => {
+  // generate sine wave 440 Hz
+  var waveform = sine(1024, 440);
+  var spectrum = ft(waveform);
+  expect(spectrum).toHaveLength(Math.trunc(22050 / 43));
+});
 it(`sphere volume`, () => {
   const expression = `4/3 * PI * R^3`;
   expect(
-    math.eval(expression, {
+    math.evaluate(expression, {
       R: 2
     })
   ).toBeCloseTo(33.5, 1);
@@ -25,16 +35,23 @@ it(``, () => {
   expect(
     utils.getLunarDate({ date: new Date(1564123375196), locale: "zh-Hans-CN" })
   )
-    .toBe(
+    .toMatchObject(
       utils.getLunarDate({
         date: new Date(1564123375196),
         locale: "zh-TW-u-ca-chinese"
       })
     )
-    .toBe(
+    .toMatchObject(
       utils.getLunarDate({ date: new Date(1564123375196), locale: "en-US" })
     )
-    .toBe("壬寅年七月廿六");
+    .toMatchObject({ lunerStr: "壬寅年七月廿六", year: "壬寅" });
+  expect(utils.getLunarDate({ date: new Date(), locale: "zh-Hans-CN" }).year)
+    .toBe(
+      utils.getLunarDate({ date: new Date(), locale: "zh-TW-u-ca-chinese" })
+        .year
+    )
+    .toBe(utils.getLunarDate({ date: new Date(), locale: "en-US" }).year)
+    .toBe("壬寅");
 });
 it(`harmonic series`, () => {
   const ret = utils.getTotal({ n: 1 });
