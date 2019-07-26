@@ -1,6 +1,18 @@
 const utils = require("./algorithm");
 const math = require("mathjs");
-
+it(`am-gm inequality`, () => {
+  const a = math.random(),
+    b = math.random();
+  const arithmeticMean = (a + b) / 2;
+  const geometricMean = math.sqrt(a * b);
+  expect(arithmeticMean).toBeGreaterThanOrEqual(geometricMean);
+  const weightedAverage = math.sqrt((a * a + b * b) / 2);
+  const harmmean = 2 / (1 / a + 1 / b);
+  expect(weightedAverage)
+    .toBeGreaterThanOrEqual(arithmeticMean)
+    .toBeGreaterThanOrEqual(geometricMean)
+    .toBeGreaterThanOrEqual(harmmean);
+});
 it(`sphere volume`, () => {
   const expression = `4/3 * PI * R^3`;
   expect(
@@ -10,12 +22,19 @@ it(`sphere volume`, () => {
   ).toBeCloseTo(33.5, 1);
 });
 it(``, () => {
-  expect(utils.getLunarDate({ date: new Date(), locale: "zh-Hans-CN" }))
+  expect(
+    utils.getLunarDate({ date: new Date(1564123375196), locale: "zh-Hans-CN" })
+  )
     .toBe(
-      utils.getLunarDate({ date: new Date(), locale: "zh-TW-u-ca-chinese" })
+      utils.getLunarDate({
+        date: new Date(1564123375196),
+        locale: "zh-TW-u-ca-chinese"
+      })
     )
-    .toBe(utils.getLunarDate({ date: new Date(), locale: "en-US" }))
-    .toBe("壬寅年六月廿二");
+    .toBe(
+      utils.getLunarDate({ date: new Date(1564123375196), locale: "en-US" })
+    )
+    .toBe("壬寅年七月廿六");
 });
 it(`harmonic series`, () => {
   const ret = utils.getTotal({ n: 1 });
