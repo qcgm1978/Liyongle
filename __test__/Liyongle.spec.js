@@ -3,6 +3,10 @@ const math = require("mathjs");
 var ft = require("fourier-transform");
 // var db = require("decibels");
 var sine = require("audio-oscillator/sin");
+it(`A set with n elements has 2^n subsets`, () => {
+  const getSubsetsNum = n => Math.pow(2, n);
+  expect(getSubsetsNum(5)).toBe(Math.pow(2, 5));
+});
 it(`am-gm inequality`, () => {
   const a = math.random(),
     b = math.random();
