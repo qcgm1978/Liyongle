@@ -38,6 +38,7 @@
     "mathjs": "^6.0.2"
   },
   "dependencies": {
+    "@kaosat-dev/sylvester": "^0.0.21",
     "fourier-transform": "^1.1.2"
   }
 }

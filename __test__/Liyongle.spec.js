@@ -3,6 +3,22 @@ const math = require("mathjs");
 var ft = require("fourier-transform");
 // var db = require("decibels");
 var sine = require("audio-oscillator/sin");
+const {
+  Vector,
+  Matrix,
+  Line,
+  Plane,
+  Sylvester
+} = require("@kaosat-dev/sylvester");
+const $M = Matrix.create,
+  $V = Vector.create,
+  $L = Line.create,
+  $P = Plane.create;
+it(`If the receiver and vector have the same number of elements, returns a Vector formed by adding them together. Otherwise, returns null.`, () => {
+  const vector1 = $V([1, 2]),
+    vector2 = $V([2, 1]);
+  expect(JSON.parse(JSON.stringify(vector1.add(vector2)))).toEqual([3, 3]);
+});
 it(`A set with n elements has 2^n subsets`, () => {
   const getSubsetsNum = n => Math.pow(2, n);
   expect(getSubsetsNum(5)).toBe(Math.pow(2, 5));
