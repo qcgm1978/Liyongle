@@ -14,6 +14,14 @@ const $M = Matrix.create,
   $V = Vector.create,
   $L = Line.create,
   $P = Plane.create;
+
+it(`How many subset includeing 0 excluding 1 and 2`, () => {
+  const subsetsOneTwo = 2 ** 2;
+  const subsets1 = subsetsOneTwo;
+  expect(subsets1)
+    .toBe(subsetsOneTwo)
+    .toBe(4);
+});
 it(`If the receiver and vector have the same number of elements, returns a Vector formed by adding them together. Otherwise, returns null.`, () => {
   const vector1 = $V([1, 2]),
     vector2 = $V([2, 1]);
