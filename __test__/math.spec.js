@@ -19,6 +19,7 @@ it(`Caculus`, () => {
   const area = Math.PI * r ** 2;
   expect(+area.toFixed(2)).toBe(3.14);
 });
+
 it(`Law of Gravity`, () => {
   const G = 9.8,
     m1 = 1,
@@ -26,4 +27,11 @@ it(`Law of Gravity`, () => {
     r = 1;
   const F = (G * m1 * m2) / r ** 2;
   expect(F).toBe(19.6);
+});
+it(`The Square Root of Minus One`, () => {
+  let pow2 = "i^2";
+  pow = -1;
+  const pow2048 = "pow^1024";
+  const i2048 = math.eval(pow2048, { pow });
+  expect(-i2048).toBe(-1);
 });
