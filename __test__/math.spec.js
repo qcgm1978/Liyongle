@@ -35,3 +35,29 @@ it(`The Square Root of Minus One`, () => {
   const i2048 = math.eval(pow2048, { pow });
   expect(-i2048).toBe(-1);
 });
+it(`Euler's Formular of Polyphedra`, () => {
+  const F = 12 + 20;
+  const E = (12 * 5 + 20 * 6) / 2;
+  const V = (12 * 5 + 20 * 6) / 3;
+  expect(F + V - E).toBe(2);
+});
+it(`Normal Distribution`, () => {
+  const arr = [580, 600, 680, 620];
+  const mean = arr.reduce((acc, item) => acc + item) / arr.length;
+  expect(mean).toBe(620);
+  const deviation = math.sqrt(
+    (1 / arr.length) * arr.reduce((acc, item) => (item - mean) ** 2 + acc, 0)
+  );
+  const standardDeviation = +deviation.toFixed(1);
+  expect(standardDeviation).toBe(37.4);
+  const expectation = 690;
+  const nDeviation = (expectation - mean) / standardDeviation;
+  const currentStandardDeviation = +nDeviation.toFixed(2);
+  expect(currentStandardDeviation).toBe(1.87);
+  const tableProbability = {
+    "1.87": 0.015
+  };
+  expect(tableProbability[currentStandardDeviation + ""] * 100 + "%").toBe(
+    "1.5%"
+  );
+});
