@@ -1,3 +1,5 @@
+var ft = require("fourier-transform");
+var sine = require("audio-oscillator/sin");
 const math = require("mathjs");
 it(`Pathagora's theorem`, () => {
   const a = 3,
@@ -60,4 +62,10 @@ it(`Normal Distribution`, () => {
   expect(tableProbability[currentStandardDeviation + ""] * 100 + "%").toBe(
     "1.5%"
   );
+});
+it(`get normalized magnitudes for frequencies from 0 to 22050 with interval 44100/1024 ≈ 43Hz. Fourier Transform`, () => {
+  // generate sine wave 440 Hz
+  var waveform = sine(1024, 440);
+  var spectrum = ft(waveform);
+  expect(spectrum).toHaveLength(Math.trunc(22050 / 43));
 });
