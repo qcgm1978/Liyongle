@@ -69,3 +69,13 @@ it(`get normalized magnitudes for frequencies from 0 to 22050 with interval 4410
   var spectrum = ft(waveform);
   expect(spectrum).toHaveLength(Math.trunc(22050 / 43));
 });
+it(`Relativity`, () => {
+  const m = 1,
+    c = 299792458;
+  expect(
+    math.eval("m*c^2", {
+      m,
+      c
+    })
+  ).toBe(89875517873681760);
+});
